@@ -11,4 +11,6 @@
 #
 class Movie < ApplicationRecord
   validates :title, :description, :year, presence: true
+  has_many :accreditations, as: :accreditable
+  has_many :personas, through: :accreditations
 end

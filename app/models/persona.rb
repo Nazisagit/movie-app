@@ -9,4 +9,6 @@
 #
 class Persona < ApplicationRecord
   validates :name, presence: true
+  has_many :accreditations
+  has_many :movies, through: :accreditations, source: :accreditable, source_type: "Movie"
 end
