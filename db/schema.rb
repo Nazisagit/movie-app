@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_142143) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_145219) do
   create_table "accreditations", force: :cascade do |t|
     t.integer "persona_id", null: false
     t.string "accreditable_type", null: false
@@ -20,6 +20,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_142143) do
     t.datetime "updated_at", null: false
     t.index ["accreditable_type", "accreditable_id"], name: "index_accreditations_on_accreditable"
     t.index ["persona_id"], name: "index_accreditations_on_persona_id"
+  end
+
+  create_table "filming_locations", force: :cascade do |t|
+    t.string "filmable_type", null: false
+    t.integer "filmable_id", null: false
+    t.string "name", null: false
+    t.string "country", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["filmable_type", "filmable_id"], name: "index_filming_locations_on_filmable"
   end
 
   create_table "movies", force: :cascade do |t|
