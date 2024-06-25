@@ -11,7 +11,10 @@
 #
 class Movie < ApplicationRecord
   validates :title, :description, :year, presence: true
+  validates :title, uniqueness: { scope: :year }
   has_many :accreditations, as: :accreditable
   has_many :personas, through: :accreditations
   has_many :reviews, as: :reviewable
+  has_many :filmable_filming_locations, as: :filmable
+  has_many :filming_locations, through: :filmable_filming_locations
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_153836) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_172127) do
   create_table "accreditations", force: :cascade do |t|
     t.integer "persona_id", null: false
     t.string "accreditable_type", null: false
@@ -22,14 +22,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_153836) do
     t.index ["persona_id"], name: "index_accreditations_on_persona_id"
   end
 
-  create_table "filming_locations", force: :cascade do |t|
+  create_table "filmable_filming_locations", force: :cascade do |t|
     t.string "filmable_type", null: false
     t.integer "filmable_id", null: false
+    t.integer "filming_location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["filmable_type", "filmable_id"], name: "index_filmable_filming_locations_on_filmable"
+    t.index ["filming_location_id"], name: "index_filmable_filming_locations_on_filming_location_id"
+  end
+
+  create_table "filming_locations", force: :cascade do |t|
     t.string "name", null: false
     t.string "country", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["filmable_type", "filmable_id"], name: "index_filming_locations_on_filmable"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -65,5 +72,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_153836) do
   end
 
   add_foreign_key "accreditations", "personas"
+  add_foreign_key "filmable_filming_locations", "filming_locations"
   add_foreign_key "reviews", "users"
 end

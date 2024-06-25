@@ -9,13 +9,13 @@ RSpec.describe FilmingLocation, type: :model do
 
     context "uniqueness" do
       before do
-        create(:filming_location, :for_movie)
+        create(:filming_location)
       end
       it { should validate_uniqueness_of(:name).scoped_to(:country) }
     end
   end
 
   describe "relations" do
-    it { should belong_to(:filmable) }
+    
   end
 end
