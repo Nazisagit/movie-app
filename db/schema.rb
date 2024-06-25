@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_145219) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_153836) do
   create_table "accreditations", force: :cascade do |t|
     t.integer "persona_id", null: false
     t.string "accreditable_type", null: false
@@ -46,5 +46,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_145219) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "rating", default: 5, null: false
+    t.string "comment"
+    t.string "reviewable_type", null: false
+    t.integer "reviewable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "accreditations", "personas"
+  add_foreign_key "reviews", "users"
 end
