@@ -10,5 +10,6 @@ RSpec.describe Movie, type: :model do
   describe "relations" do
     it { should have_many(:accreditations) }
     it { should have_many(:personas).through(:accreditations) }
+    it { should have_many(:reviews) }
   end
 end

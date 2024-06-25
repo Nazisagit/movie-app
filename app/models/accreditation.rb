@@ -20,7 +20,7 @@
 #  persona_id  (persona_id => personas.id)
 #
 class Accreditation < ApplicationRecord
-  validates :accreditation_type, presence: true
+  validates :accreditation_type, :persona, :accreditable, presence: true
   belongs_to :persona
   belongs_to :accreditable, polymorphic: true
   enum accreditation_type: {
