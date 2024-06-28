@@ -3,6 +3,16 @@ require 'rails_helper'
 RSpec.describe Persona, type: :model do
   describe "validations" do
     it { should validate_presence_of(:name) }
+
+    context "uniqueness" do
+      before do
+        create(:persona)
+        subject do
+          build(:persona)
+        end
+      end
+      it { should validate_uniqueness_of(:name) }
+    end
   end
 
   describe "relations" do
