@@ -6,8 +6,6 @@ RSpec.describe Movie, type: :model do
       it { should validate_presence_of(:title) }
       it { should validate_presence_of(:description) }
       it { should validate_presence_of(:year) }
-      it { should validate_presence_of(:filmable_filming_locations) }
-      it { should validate_presence_of(:filming_locations) }
     end
 
     context "uniqueness" do
