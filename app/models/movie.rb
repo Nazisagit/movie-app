@@ -9,6 +9,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_movies_on_title_and_year  (title,year) UNIQUE
+#
 class Movie < ApplicationRecord
   validates :title, :description, :year, presence: true
   validates :title, uniqueness: { scope: :year }
