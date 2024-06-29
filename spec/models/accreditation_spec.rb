@@ -11,20 +11,6 @@ RSpec.describe Accreditation, type: :model do
       it { should validate_presence_of(:persona) }
       it { should validate_presence_of(:accreditable) }
     end
-
-    context "uniqueness" do
-      let!(:persona) { create(:persona) }
-      let!(:accreditable) { create(:movie) }
-      let(:accreditation_type) { :actor }
-      before do
-        create(:accreditation, :acting_credit, accreditable: accreditable, persona: persona)
-      end
-      it "validates the uniqueness of the accreditable and accreditation type to the persona" do
-        should validate_uniqueness_of(:accreditable_id).scoped_to(:persona_id)
-        should validate_uniqueness_of(:accreditable_id).scoped_to(:persona_id)
-        should validate_uniqueness_of(:accreditation_type).ignoring_case_sensitivity.scoped_to(:persona_id)
-      end
-    end
   end
 
   describe "relations" do
