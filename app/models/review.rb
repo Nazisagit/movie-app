@@ -13,9 +13,9 @@
 #
 # Indexes
 #
-#  idx_on_user_id_rating_comment_reviewable_id_reviewa_c5c31ebb27  (user_id,rating,comment,reviewable_id,reviewable_type) UNIQUE
-#  index_reviews_on_reviewable                                     (reviewable_type,reviewable_id)
-#  index_reviews_on_user_id                                        (user_id)
+#  index_reviews_on_reviewable                 (reviewable_type,reviewable_id)
+#  index_reviews_on_reviewable_id_and_user_id  (reviewable_id,user_id) UNIQUE
+#  index_reviews_on_user_id                    (user_id)
 #
 # Foreign Keys
 #
@@ -23,7 +23,7 @@
 #
 class Review < ApplicationRecord
   validates :rating, :user, :reviewable, :comment, presence: true
-  validates :rating, :comment, :reviewable_type, :reviewable_id, uniqueness: { scope: :user_id }
+  validates :reviewable_id, uniqueness: { scope: :user_id }
   validates :rating, numericality: { greater_than: 0, less_than_or_equal_to: 5 }
   belongs_to :user
   belongs_to :reviewable, polymorphic: true
