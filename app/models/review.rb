@@ -27,4 +27,10 @@ class Review < ApplicationRecord
   validates :rating, numericality: { greater_than: 0, less_than_or_equal_to: 5 }
   belongs_to :user
   belongs_to :reviewable, polymorphic: true
+  after_save :update_reviewable_avg_rating
+
+  def update_reviewable_avg_rating
+    return false if !reviewable.has_attribute?(:avg_rating)
+    reviewable.update_avg_rating
+  end
 end
