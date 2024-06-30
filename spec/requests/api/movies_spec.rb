@@ -12,19 +12,19 @@ RSpec.describe "Api::Movies", type: :request do
       let!(:movie_1) { create(:movie, filming_locations: [create(:filming_location)], avg_rating: rating_1) }
       let!(:actor_1) { create(:accreditation, :acting_credit, persona: create(:persona), accreditable: movie_1) }
       let!(:director_1) { create(:accreditation, :directing_credit, persona: create(:persona), accreditable: movie_1) }
-      let!(:review_1) { create(:review, reviewable: movie_1, rating: rating_1) }
+      let!(:review_1) { create(:review, reviewable: movie_1, rating: rating_1, user: create(:user)) }
 
       let(:rating_2) { 3 }
       let!(:movie_2) { create(:movie, filming_locations: [create(:filming_location)], avg_rating: rating_2) }
       let!(:actor_2) { create(:accreditation, :acting_credit, persona: create(:persona), accreditable: movie_2) }
       let!(:director_2) { create(:accreditation, :directing_credit, persona: create(:persona), accreditable: movie_2) }
-      let!(:review_2) { create(:review, reviewable: movie_2, rating: rating_2) }
+      let!(:review_2) { create(:review, reviewable: movie_2, rating: rating_2, user: create(:user)) }
 
       let(:rating_3) { 1 }
       let!(:movie_3) { create(:movie, filming_locations: [create(:filming_location)], avg_rating: rating_3) }
       let!(:actor_3) { create(:accreditation, :acting_credit, persona: create(:persona), accreditable: movie_3) }
       let!(:director_3) { create(:accreditation, :directing_credit, persona: create(:persona), accreditable: movie_3) }
-      let!(:review_3) { create(:review, reviewable: movie_3, rating: rating_3) }
+      let!(:review_3) { create(:review, reviewable: movie_3, rating: rating_3, user: create(:user)) }
 
       let(:movies) { response.parsed_body["movies"] }
 
