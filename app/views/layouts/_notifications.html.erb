@@ -1,0 +1,6 @@
+<% flash.each do |type, msg| %>
+  <div class="notification is-<%= type %> is-light">
+    <button class="delete" onclick="this.parentElement.remove()"></button>
+    <%= msg %>
+  </div>
+<% end %>

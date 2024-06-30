@@ -1,0 +1,30 @@
+<h1 class="title">Movies</h1>
+<%= render "movies/search_form" %>
+<table class="table is-striped">
+  <thead>
+    <tr class="is-primary">
+      <th>Title</th>
+      <th>Description</th>
+      <th>Year</th>
+      <th>
+        <button><strong>Avg rating</strong></button>
+      </th>
+      <th>Actor(s)</th>
+      <th>Director(s)</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.title %></td>
+        <td><%= movie.description %></td>
+        <td><%= movie.year %></td>
+        <td><%= movie.avg_rating %></td>
+        <td><%= movie.actors.map(&:name).to_sentence %></td>
+        <td><%= movie.directors.map(&:name).to_sentence %></td>
+        <td><%= link_to "Reviews", movie_reviews_path(movie), class: "button is-link is-light" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,21 @@
+<%= render "movies/link_to_index"%>
+<h1 class="title">Reviews</h1>
+<h2 class="subtitle"><%= @movie.title %></h2>
+<table class="table is-striped">
+  <thead>
+    <tr>
+      <th>Comment</th>
+      <th>Rating</th>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td><%= review.comment %></td>
+        <td><%= review.rating %></td>
+        <td><%= review.user.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

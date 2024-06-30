@@ -3,6 +3,7 @@
 # Table name: movies
 #
 #  id          :integer          not null, primary key
+#  avg_rating  :integer          default(0), not null
 #  description :text             not null
 #  title       :string           not null
 #  year        :integer          not null

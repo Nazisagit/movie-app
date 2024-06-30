@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_172127) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_29_072112) do
   create_table "accreditations", force: :cascade do |t|
     t.integer "persona_id", null: false
     t.string "accreditable_type", null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_172127) do
     t.integer "filming_location_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["filmable_id", "filmable_type", "filming_location_id"], name: "idx_on_filmable_id_filmable_type_filming_location_i_2e9f91d2ed", unique: true
     t.index ["filmable_type", "filmable_id"], name: "index_filmable_filming_locations_on_filmable"
     t.index ["filming_location_id"], name: "index_filmable_filming_locations_on_filming_location_id"
   end
@@ -37,6 +38,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_172127) do
     t.string "country", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "country"], name: "index_filming_locations_on_name_and_country", unique: true
   end
 
   create_table "movies", force: :cascade do |t|
@@ -45,22 +47,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_172127) do
     t.integer "year", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "avg_rating", default: 0, null: false
+    t.index ["title", "year"], name: "index_movies_on_title_and_year", unique: true
   end
 
   create_table "personas", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_personas_on_name", unique: true
   end
 
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "rating", default: 5, null: false
-    t.string "comment"
+    t.string "comment", default: ""
     t.string "reviewable_type", null: false
     t.integer "reviewable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["reviewable_id", "user_id"], name: "index_reviews_on_reviewable_id_and_user_id", unique: true
     t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
