@@ -91,6 +91,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
+    csv (3.3.0)
     date (3.3.4)
     debug (1.9.2)
       irb (~> 1.10)
@@ -270,6 +271,7 @@ DEPENDENCIES
   bootsnap
   countries (~> 6.0, >= 6.0.1)
   cssbundling-rails
+  csv (~> 3.3)
   debug
   factory_bot_rails (~> 6.4, >= 6.4.3)
   faker (~> 3.4, >= 3.4.1)

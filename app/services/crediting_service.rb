@@ -17,10 +17,8 @@ class CreditingService
     begin
       accreditation.save! unless accreditation.persisted?
     rescue ActiveRecord::RecordInvalid
-      if accreditation.errors.of_kind?(:accreditation_type, :taken) ||
-        accreditation.errors.of_kind?(:accreditable, :taken) ||
-        accreditation.errors.of_kind?(:accreditable_type, :taken)
-        raise AccreditationAlreadyExists.new
+      if accreditation.errors.of_kind?(:accreditation_type, :taken)
+        raise AccreditationAlreadyExists.new, "#{persona.name} for #{accreditation.accreditable.title}"
       end
     end
     accreditation
