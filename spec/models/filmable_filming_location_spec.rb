@@ -8,7 +8,7 @@ RSpec.describe FilmableFilmingLocation, type: :model do
     end
 
     context "uniqueness" do
-      context "unique film locations per movie" do
+      context "film locations are unique for each movie" do
         let(:filming_location) { create(:filming_location) }
         let(:movie) do
           create(:movie, filming_locations: [filming_location])
@@ -17,12 +17,13 @@ RSpec.describe FilmableFilmingLocation, type: :model do
         subject do
           build(
             :filmable_filming_location,
-            filmable: movie,
-            filming_location: create(:filming_location)
+            filmable: create(:movie),
+            filming_location: filming_location
           )
         end
 
         it { should validate_uniqueness_of(:filming_location).scoped_to([:filmable_id, :filmable_type]) }
+        it { should be_valid }
       end
     end
   end
