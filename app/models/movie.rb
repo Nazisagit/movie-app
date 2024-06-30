@@ -22,4 +22,12 @@ class Movie < ApplicationRecord
   has_many :reviews, as: :reviewable
   has_many :filmable_filming_locations, as: :filmable
   has_many :filming_locations, through: :filmable_filming_locations
+
+  def actors
+    accreditations.actor.map(&:persona)
+  end
+
+  def directors
+    accreditations.director.map(&:persona)
+  end
 end
