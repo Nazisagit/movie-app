@@ -7,9 +7,6 @@ RSpec.describe Persona, type: :model do
     context "uniqueness" do
       before do
         create(:persona)
-        subject do
-          build(:persona)
-        end
       end
       it { should validate_uniqueness_of(:name) }
     end
