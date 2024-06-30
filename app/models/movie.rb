@@ -30,4 +30,10 @@ class Movie < ApplicationRecord
   def directors
     accreditations.director.map(&:persona)
   end
+
+  def update_avg_rating
+    return nil unless reviews.present?
+    avg_rating = reviews.map(&:rating).sum / reviews.size
+    update(avg_rating: avg_rating)
+  end
 end
